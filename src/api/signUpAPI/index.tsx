@@ -2,13 +2,13 @@ import { Api } from "../axios-config";
 //import axios from "axios";
 //import MockAdapter from "axios-mock-adapter";
 
-interface Item {
+interface Item{
     user: string,
     password: string,
     name: string,
     cpf: string,
     birth: string
-}
+  }
 
 export const signUpAPI = async (info: Item): Promise<boolean | Error> => {
     try{

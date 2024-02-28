@@ -1,11 +1,28 @@
 import useLogin from '../../../hook/useLogin';
 import './index.css';
 
-interface LoginProps{
-    setPage: React.Dispatch<React.SetStateAction<string>>
+interface Products{
+    id: number,
+    name: string,
+    price: number,
+    supplier: string,
+    barcode: number,
+    userId: number
 }
 
-const Login = (props: LoginProps) => {
+interface Data{
+    id: number,
+    products: Products[],
+}
+
+interface LoginProps{
+    setPage: React.Dispatch<React.SetStateAction<string>>
+    setData: React.Dispatch<React.SetStateAction<Data>>
+}
+
+
+
+const Login = ({setPage, setData}: LoginProps) => {
     const {
         username,
         setUsername,
@@ -13,7 +30,7 @@ const Login = (props: LoginProps) => {
         setPassword,
         error,
         handleSubmit
-    } = useLogin(props?.setPage);
+    } = useLogin({setPage, setData});
 
     return(
         <form>
@@ -28,7 +45,7 @@ const Login = (props: LoginProps) => {
             </div>
             <button type='submit' onClick={e => handleSubmit(e)}>Entrar</button>
             <div className='signUpText'>
-                <h2>Ainda não se cadastrou? <i onClick={() => props?.setPage('signup')}>Cadastre-se</i></h2>
+                <h2>Ainda não se cadastrou? <i onClick={() => setPage('signup')}>Cadastre-se</i></h2>
             </div>
         </form>
     )

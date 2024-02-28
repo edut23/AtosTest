@@ -5,13 +5,13 @@ import SignUp from './signUp';
 import Menu from './menu';
 
 const MainCard = () => {
-    const {page, setPage} = useMain();
+    const {page, setPage, data, setData} = useMain();
 
     return(
         <div className='main'>
-            {page === 'login' && <Login setPage={setPage}/>}
+            {page === 'login' && <Login setPage={setPage} setData={setData}/>}
             {page === 'signup' && <SignUp setPage={setPage}/>}
-            {page === 'menu' && <Menu setPage={setPage}/>}
+            {page === 'menu' && <Menu setPage={setPage} products={data} setData={setData}/>}
         </div>
     )
 }

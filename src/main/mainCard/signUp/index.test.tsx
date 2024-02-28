@@ -19,7 +19,7 @@ describe('SignUp Component', () => {
   });
 
   it('should call SignUpApi with correct credentials on form submission', async () => {
-    const { getByPlaceholderText, getByTitle } = render(<SignUp setPage={setPage.rerender} />);
+    const { getByPlaceholderText, getByTitle } = render(<SignUp setPage={setPage.result.current} />);
 
     fireEvent.change(getByPlaceholderText('Usuário'), { target: { value: 'testuser' } });
     fireEvent.change(getByPlaceholderText('Senha'), { target: { value: 'testpassword' } });

@@ -60,7 +60,7 @@ describe('SignUp Component', () => {
   it('should display error message for invalid credentials', async () => {
     (signUpAPI as jest.Mock).mockRejectedValue(new Error('Invalid credentials'));
 
-    const { getByPlaceholderText, getByTitle } = render(<SignUp setPage={setPage.rerender} />);
+    const { getByPlaceholderText, getByTitle } = render(<SignUp setPage={setPage.result.current} />);
 
     fireEvent.change(getByPlaceholderText('Usuário'), { target: { value: 'testuser' } });
     fireEvent.change(getByPlaceholderText('Senha'), { target: { value: 'testpassword' } });

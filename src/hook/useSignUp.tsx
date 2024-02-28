@@ -32,7 +32,7 @@ const useSignUp = (setPage: React.Dispatch<React.SetStateAction<string>>) => {
                     password: password,
                     name: name,
                     cpf: cpf,
-                    birth: birth
+                    birth: birth,
                 }
                 const check = await signUpAPI(info);
     
