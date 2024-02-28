@@ -7,22 +7,26 @@ interface Products{
     price: number,
     supplier: string,
     barcode: number,
-    userId: number
 }
 
 interface Data{
     id: number,
+    user: string,
+    password: string,
+    name: string,
+    cpf: string,
+    birth: string,
     products: Products[],
 }
 
 interface MenuProps{
     item: Products,  
-    products: Data,
+    data: Data,
     setData: React.Dispatch<React.SetStateAction<Data>>
 }
 
 
-const useItem = ({item, products, setData}: MenuProps) => {
+const useItem = ({item, data, setData}: MenuProps) => {
     const [editMode, setEditMode] = useState(false);
     const [name, setName] = useState(item.name);
     const [price, setPrice] = useState(item.price);
@@ -31,23 +35,22 @@ const useItem = ({item, products, setData}: MenuProps) => {
 
 
     const editProduct = (index: number) => {
-        let tempArray = products.products;
+        let tempArray = data.products;
         tempArray[index] = {
             id: tempArray[index].id,
             name: name,
             price: price,
             supplier: supplier,
             barcode: barcode,
-            userId: products.id
         }
 
-        setData({id: products.id, products: tempArray});
+        setData({...data, products: tempArray});
 
         try{
-            updateAPI(products.id, index+1, tempArray[index])
+            updateAPI(data.id, data);
         }
         catch (error){
-            console.log("F")
+            console.log("F");
         }
         setEditMode(false);
     }

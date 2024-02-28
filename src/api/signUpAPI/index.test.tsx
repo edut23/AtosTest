@@ -8,7 +8,8 @@ interface SignUpInfo{
   password: string,
   name: string,
   cpf: string,
-  birth: string
+  birth: string,
+  products: []
 }
 
 jest.mock('.', () => ({
@@ -49,7 +50,8 @@ describe('SignUp Component', () => {
       password: 'testpassword',
       name: 'Fulano da Silva',
       cpf: '11022033044',
-      birth: '1999-02-15'
+      birth: '1999-02-15',
+      products: []
     }
 
     await waitFor(() => {

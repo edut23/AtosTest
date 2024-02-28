@@ -7,7 +7,8 @@ interface Item{
     password: string,
     name: string,
     cpf: string,
-    birth: string
+    birth: string,
+    products: [],
   }
 
 export const signUpAPI = async (info: Item): Promise<boolean | Error> => {

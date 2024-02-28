@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { updateAPI } from "../api/updateAPI";
 
 interface Products{
     id: number,
@@ -6,21 +7,25 @@ interface Products{
     price: number,
     supplier: string,
     barcode: number,
-    userId: number
 }
 
 interface Data{
     id: number,
+user: string,
+    password: string,
+    name: string,
+    cpf: string,
+    birth: string,
     products: Products[],
 }
 
 interface MenuProps{
     setPage: React.Dispatch<React.SetStateAction<string>>,  
-    products: Data,
+    data: Data,
     setData: React.Dispatch<React.SetStateAction<Data>>
 }
 
-const useMenu = ({setPage, products, setData}: MenuProps) => {
+const useMenu = ({setPage, data, setData}: MenuProps) => {
     const [addMode, setAddmode] = useState(false);
     const [name, setName] = useState('');
     const [price, setPrice] = useState(0);
@@ -29,24 +34,23 @@ const useMenu = ({setPage, products, setData}: MenuProps) => {
 
 
     const addProduct = () => {
-        let tempArray = products.products;
+        let tempArray = data.products;
         tempArray = [...tempArray, {
                 id: tempArray.length + 1,
                 name: name,
                 price: price,
                 supplier: supplier,
-                barcode: barcode,
-                userId: products.id
+                barcode: barcode
             }
         ]
-        setData({id: products.id, products: tempArray});
-        setAddmode(false);      
-        console.log(tempArray, products);
+        setData({...data, products: tempArray});
+        try{
+            updateAPI(data.id, data);
+            setAddmode(false);    
+        }
+        catch (error){
+        }
     }
-
-    useEffect(() => {
-        console.log(products)
-    }, [products])
 
     return {
         name,

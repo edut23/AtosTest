@@ -6,7 +6,8 @@ interface SignUpInfo{
     password: string,
     name: string,
     cpf: string,
-    birth: string
+    birth: string,
+    products: [],
 }
 
 const useSignUp = (setPage: React.Dispatch<React.SetStateAction<string>>) => {
@@ -33,6 +34,7 @@ const useSignUp = (setPage: React.Dispatch<React.SetStateAction<string>>) => {
                     name: name,
                     cpf: cpf,
                     birth: birth,
+                    products: []
                 }
                 const check = await signUpAPI(info);
     

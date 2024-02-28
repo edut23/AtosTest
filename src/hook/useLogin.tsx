@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { loginApi } from "../api/loginAPI";
-import { productsAPI } from "../api/productsAPI";
 
 interface Products{
     id: number,
@@ -8,12 +7,16 @@ interface Products{
     price: number,
     supplier: string,
     barcode: number,
-    userId: number
 }
 
 
 interface Data{
     id: number,
+user: string,
+    password: string,
+    name: string,
+    cpf: string,
+    birth: string,
     products: Products[],
 }
 
@@ -31,24 +34,13 @@ const useLogin = ({setPage, setData}: LoginProps) => {
         e.preventDefault();
 
         try {
-            const id = await loginApi(username, password);
+            const data = await loginApi(username, password);
 
-            if(id instanceof Error)
+            if(data instanceof Error)
                 setError('Credenciais inválidas');
             else{
-                try{
-                    const products = await productsAPI(id);
-                    
-                    if(products instanceof Error)
-                        setError('Erro ao carregar dados');
-                    else{
-                        setData({id: id, products: products});
-                        setPage('menu');
-                    }
-                }
-                catch (error){    
-                    setError('Erro ao carregar dados');
-                }
+                setData(data);
+                setPage('menu');
             }
         } 
         catch (error) {

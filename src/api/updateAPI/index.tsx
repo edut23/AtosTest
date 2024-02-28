@@ -6,18 +6,24 @@ interface Products{
     price: number,
     supplier: string,
     barcode: number,
-    userId: number
 }
 
-export const updateAPI = async (id: number, itemId: number, product: Products): Promise<void | Error> => {
+interface Data{
+    id: number,
+    user: string,
+    password: string,
+    name: string,
+    cpf: string,
+    birth: string,
+    products: Products[],
+}
+
+export const updateAPI = async (id: number, product: Data): Promise<void | Error> => {
 
     try{
-        const response = await Api.put(`/products/?userId=${itemId}&id=${id}`, product);
-
-        console.log("foi", response)
+        await Api.put(`/user/${id}`, product);
 
     } catch (error) {
-        console.error(error)
-        return new Error((error as { message: string}).message || 'Listing movies error.')
+        return new Error((error as { message: string}).message || 'Update error.')
     }
 };

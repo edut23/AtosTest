@@ -5,31 +5,58 @@
       "user": "testuser",
       "password": "testpassword",
       "birth": "01/01/2024",
-      "cpf": 12345678910
-    }
-  ],
-  "products": [
-    {
-      "id": 1,
-      "items": [
+      "cpf": 12345678910,
+      "products": [
         {
           "id": 1,
-          "name": "caneta",
+          "name": "prato",
           "price": 5.78,
           "supplier": "bic",
-          "barcode": 1557894,
-          "userId": 1
+          "barcode": 1557894
         },
         {
           "id": 2,
           "name": "lapis",
           "price": 5.78,
-          "supplier": "bic",
-          "barcode": 1557894,
-          "userId": 1
+          "supplier": "eita",
+          "barcode": 1557894
         }
       ]
+    },
+    {
+      "user": "eu",
+      "password": "eu",
+      "name": "edu",
+      "cpf": "123",
+      "birth": "1001-01-23",
+      "products": [
+        {
+          "id": 1,
+          "name": "adad",
+          "price": 55,
+          "supplier": "wede",
+          "barcode": 1258
+        }
+      ],
+      "id": 2
+    },
+    {
+      "user": "testuser",
+      "password": "testpassword",
+      "name": "Fulano da Silva",
+      "cpf": "11022033044",
+      "birth": "1999-02-15",
+      "products": [],
+      "id": 3
+    },
+    {
+      "user": "testuser",
+      "password": "testpassword",
+      "name": "Fulano da Silva",
+      "cpf": "",
+      "birth": "1999-02-15",
+      "products": [],
+      "id": 4
     }
-    
   ]
 }

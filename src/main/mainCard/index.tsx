@@ -11,7 +11,7 @@ const MainCard = () => {
         <div className='main'>
             {page === 'login' && <Login setPage={setPage} setData={setData}/>}
             {page === 'signup' && <SignUp setPage={setPage}/>}
-            {page === 'menu' && <Menu setPage={setPage} products={data} setData={setData}/>}
+            {page === 'menu' && <Menu setPage={setPage} data={data} setData={setData}/>}
         </div>
     )
 }

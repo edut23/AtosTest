@@ -7,21 +7,25 @@ interface Products{
     price: number,
     supplier: string,
     barcode: number,
-    userId: number
 }
 
 interface Data{
     id: number,
+    user: string,
+    password: string,
+    name: string,
+    cpf: string,
+    birth: string,
     products: Products[],
 }
 
 interface MenuProps{
     setPage: React.Dispatch<React.SetStateAction<string>>,  
-    products: Data,
+    data: Data,
     setData: React.Dispatch<React.SetStateAction<Data>>
 }
 
-const Menu = ({setPage, products, setData}: MenuProps) => {
+const Menu = ({setPage, data, setData}: MenuProps) => {
     const {
         name,
         setName,
@@ -34,24 +38,24 @@ const Menu = ({setPage, products, setData}: MenuProps) => {
         addMode,
         setAddmode,
         addProduct,
-    } = useMenu({setPage, products, setData});
+    } = useMenu({setPage, data, setData});
 
     return(
         <div>
             <div>
-                {products?.products && products?.products.map((item, index) => 
-                    <Item item={item} index={index} setPage={setPage} products={products} setData={setData}/>
+                {data?.products && data?.products.map((item, index) => 
+                    <Item item={item} index={index} setPage={setPage} data={data} setData={setData}/>
                 )}
                 {addMode &&
                     <div>
                         <p>Nome do produto:</p>
-                        <input type='text' value={name} onChange={e => setName(e.target.value)}/>
+                        <input type='text' title={name} value={name} onChange={e => setName(e.target.value)}/>
                         <p>Preço:</p>
                         <input type='number' value={price} onChange={e => setPrice(parseFloat(e.target.value))}/>
                         <p>Fornecedor:</p>
                         <input type='text' value={supplier} onChange={e => setSupplier(e.target.value)}/>
                         <p>Id:</p>
-                        <input type='number' value={products?.products?.length + 1} disabled={true}/>
+                        <input type='number' value={data?.products?.length + 1} disabled={true}/>
                         <p>Código de barras:</p>
                         <input type='number' value={barcode} onChange={e => setBarcode(parseInt(e.target.value))}/>
                         <button onClick={() => setAddmode(false)}>
@@ -63,7 +67,7 @@ const Menu = ({setPage, products, setData}: MenuProps) => {
                     </div>
                 }
             </div>
-            <button onClick={() => setAddmode(!addMode)}>Adicionar Produto</button>
+            {!addMode && <button onClick={() => setAddmode(true)}>Adicionar Produto</button>}
         </div>
     )
 }

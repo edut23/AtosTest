@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Api } from "../axios-config";
 //import axios from "axios";
 //import MockAdapter from "axios-mock-adapter";
@@ -8,40 +9,44 @@ interface Products{
     price: number,
     supplier: string,
     barcode: number,
-    userId: number
 }
 
-interface Item {
+interface Item{
     id: number,
     user: string,
     password: string,
-    products: Products[]
-}
-
-interface Data{
-    id: number,
+    name: string,
+    cpf: string,
+    birth: string,
     products: Products[],
 }
 
 
-export const loginApi = async (username: string, password: string): Promise<number | Error> => {
-
+export const loginApi = async (username: string, password: string): Promise<Item | Error> => {
     try{
         const { data } = await Api.get('/user');
 
         let token: boolean = false;
-        let id: number = 0;
+        let user: Item = {
+            id: 0,
+            user: '',
+            password: '',
+            name: '',
+            cpf: '',
+            birth: '',
+            products: [],
+        };
 
         data.map((item: Item) => {
             if(item.user === username && item.password === password){
                 token = true;
-                id = item.id;
+                user= item;
             }
             return null;
         })
         
         if(token)
-            return id;
+            return user;
         else
             return new Error('Credenciais inválidas')
 

@@ -6,11 +6,15 @@ interface Products{
     price: number,
     supplier: string,
     barcode: number,
-    userId: number
 }
 
 interface Data{
     id: number,
+    user: string,
+    password: string,
+    name: string,
+    cpf: string,
+    birth: string,
     products: Products[],
 }
 
@@ -18,12 +22,12 @@ interface ItemProps{
     item: Products,
     index: number,
     setPage: React.Dispatch<React.SetStateAction<string>>,  
-    products: Data,
+    data: Data,
     setData: React.Dispatch<React.SetStateAction<Data>>
 }
 
 
-const Item = ({item, index, setPage, products, setData}: ItemProps) => {
+const Item = ({item, index, setPage, data, setData}: ItemProps) => {
     const {
         name,
         setName,
@@ -37,12 +41,12 @@ const Item = ({item, index, setPage, products, setData}: ItemProps) => {
         setEditMode,
         editProduct,
         cancelEdit
-    } = useItem({item, products, setData});
+    } = useItem({item, data, setData});
 
     return(
         <div>
             <p>Nome do produto:</p>
-            <input type='text' value={name} onChange={e => setName(e.target.value)} disabled={!editMode}/>
+            <input type='text' title={name} value={name} onChange={e => setName(e.target.value)} disabled={!editMode}/>
             <p>Preço:</p>
             <input type='number' value={price} onChange={e => setPrice(parseFloat(e.target.value))} disabled={!editMode}/>
             <p>Fornecedor:</p>
