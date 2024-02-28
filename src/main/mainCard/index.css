@@ -1,0 +1,31 @@
+.main{
+    background-color: #FFFFFF;
+    color: black;
+    width: 50%;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+h2{
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.inputDiv{
+    font-size: calc(8px + 1vmin);
+    margin-bottom: 15px;
+
+    input{
+        width: -webkit-fill-available;
+        border-radius: 6px;
+        padding: 8px;
+    }
+}
+
+.signUpText{
+    margin-top: 25px;
+    text-align: center;
+    font-size: calc(6px + 1vmin);
+}

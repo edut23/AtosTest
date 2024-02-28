@@ -1,0 +1,71 @@
+{
+  "user": [
+    {
+      "id": 1,
+      "user": "testuser",
+      "password": "testpassword",
+      "birth": "01/01/2024",
+      "cpf": 12345678910
+    },
+    {
+      "username": "dwawdaw",
+      "password": "dadwwad",
+      "id": 2
+    },
+    {
+      "username": "usertest",
+      "password": "testpassword",
+      "id": 3
+    },
+    {
+      "username": "wadawdaw",
+      "password": "waddawdaw",
+      "id": 4
+    },
+    {
+      "username": "testuser",
+      "password": "testpassword",
+      "id": 5
+    },
+    {
+      "user": "edut23",
+      "password": "edut23",
+      "name": "Edu Teodoro Batista",
+      "cpf": "47908878806",
+      "birth": "2001-01-23",
+      "id": 6
+    },
+    {
+      "user": "assdasd",
+      "password": "",
+      "name": "adsadasd",
+      "cpf": "",
+      "birth": "2024-02-03",
+      "id": 7
+    },
+    {
+      "user": "",
+      "password": "",
+      "name": "adw",
+      "cpf": "",
+      "birth": "",
+      "id": 8
+    },
+    {
+      "user": "",
+      "password": "",
+      "name": "",
+      "cpf": "",
+      "birth": "",
+      "id": 9
+    },
+    {
+      "user": "dawdaw",
+      "password": "123",
+      "name": "sadas",
+      "cpf": "sadasd",
+      "birth": "2024-02-08",
+      "id": 10
+    }
+  ]
+}
