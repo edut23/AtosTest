@@ -22,7 +22,6 @@ const useSignUp = (setPage: React.Dispatch<React.SetStateAction<string>>) => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [confirmError, setConfirmError] = useState('');
     const [error, setError] = useState<Partial<SignUpInfo>>({});
-    const [block, setBlock] = useState(false);
 
     const handleName = (value: string) =>{
         setForm({...form, name: value});

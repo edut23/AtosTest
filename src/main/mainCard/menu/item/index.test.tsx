@@ -23,7 +23,7 @@ describe('Item Component', () => {
   const setData = jest.fn();
 
   test('renders correctly', () => {
-    render(<Item item={item} index={0} setPage={jest.fn()} data={data} setData={setData} />);
+    render(<Item item={item} index={0} data={data} setData={setData} />);
 
     expect(screen.getByText('Nome do produto:')).toBeInTheDocument();
     expect(screen.getByText('Preço:')).toBeInTheDocument();
@@ -34,7 +34,7 @@ describe('Item Component', () => {
   });
 
   test('allows editing product name', () => {
-    render(<Item item={item} index={0} setPage={jest.fn()} data={data} setData={setData} />);
+    render(<Item item={item} index={0} data={data} setData={setData} />);
 
     const input = screen.getByTitle('Caneta');
     const buttonEdit = screen.getByText('Editar produto');

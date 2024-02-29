@@ -7,12 +7,6 @@
   color: white;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
   text-align: left;
   margin: 3vh 0 0 5vw;
@@ -22,16 +16,6 @@ h1 {
   margin: 0;
   -webkit-text-stroke-width: 1.5px;
   -webkit-text-stroke-color: #000;
-}
-
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 .body{

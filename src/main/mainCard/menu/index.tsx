@@ -43,7 +43,7 @@ const Menu = ({setPage, data, setData}: MenuProps) => {
         <div>
             <div className="cardItem">
                 {data?.products && data?.products.map((item, index) => 
-                    <Item item={item} index={index} setPage={setPage} data={data} setData={setData}/>
+                    <Item item={item} index={index} data={data} setData={setData}/>
                 )}
                 {addMode &&
                     <div>

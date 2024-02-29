@@ -22,13 +22,12 @@ interface Data{
 interface ItemProps{
     item: Products,
     index: number,
-    setPage: React.Dispatch<React.SetStateAction<string>>,  
     data: Data,
     setData: React.Dispatch<React.SetStateAction<Data>>
 }
 
 
-const Item = ({item, index, setPage, data, setData}: ItemProps) => {
+const Item = ({item, index, data, setData}: ItemProps) => {
     const {
         form,
         handleName,
