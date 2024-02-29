@@ -11,9 +11,10 @@
           "id": 1,
           "name": "lapis",
           "price": 5.78,
-          "supplier": "novo",
+          "supplier": "bic",
           "barcode": 1557897
         }
+     
       ]
     }
   ]
