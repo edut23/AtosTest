@@ -13,31 +13,8 @@
           "price": 5.78,
           "supplier": "eita",
           "barcode": 1557897
-        },
-        {
-          "id": 2,
-          "name": "lapis",
-          "price": 5.78,
-          "supplier": "eita",
-          "barcode": 1557894
-        },
-        {
-          "id": 3,
-          "name": "caderno",
-          "price": 15.5,
-          "supplier": "tilibra",
-          "barcode": 1478978
         }
       ]
-    },
-    {
-      "user": "edut23",
-      "password": "edut23",
-      "name": "edu",
-      "cpf": "147.852.963-23",
-      "birth": "2008-01-23",
-      "products": [],
-      "id": 2
     }
   ]
 }
