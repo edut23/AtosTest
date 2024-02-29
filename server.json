@@ -9,9 +9,9 @@
       "products": [
         {
           "id": 1,
-          "name": "prato",
+          "name": "lapis",
           "price": 5.78,
-          "supplier": "eita",
+          "supplier": "novo",
           "barcode": 1557897
         }
       ]
