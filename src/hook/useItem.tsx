@@ -9,6 +9,14 @@ interface Products{
     barcode: number,
 }
 
+interface Error{
+    id: string,
+    name: string,
+    price: string,
+    supplier: string,
+    barcode: string,
+}
+
 interface Data{
     id: number,
     user: string,
@@ -27,54 +35,107 @@ interface MenuProps{
 
 
 const useItem = ({item, data, setData}: MenuProps) => {
+    const [form, setForm] = useState<Products>({
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        supplier: item.supplier,
+        barcode: item.barcode,
+    });
     const [editMode, setEditMode] = useState(false);
-    const [name, setName] = useState(item.name);
-    const [price, setPrice] = useState(item.price);
-    const [supplier, setSupplier] = useState(item.supplier);
-    const [barcode, setBarcode] = useState(item.barcode);
+    const [error, setError] = useState<Partial<Error>>({});
+
+    console.log(item, form)
+
+    const handleName = (value: string) =>{
+        setForm({...form, name: value});
+    }
+
+    const handlePrice = (value: number) =>{
+        setForm({...form, price: value});
+    }
+
+    const handleSupplier = (value: string) =>{
+        setForm({...form, supplier: value});
+    }
+
+    const handleBarcode = (value: number) =>{
+        setForm({...form, barcode: value});
+    }
+
+    const validarCampos = () => {
+        const novosErros: Partial<Error> = {};
+      
+        if (form.name.trim() === '' && form.name.length < 1) {
+          novosErros.name = 'Nome inválido';
+        }
+      
+        if (form.price < 0.01) {
+            novosErros.price = 'Preço inválido';
+        }
+      
+        if (form.supplier.trim() === '' && form.supplier.length < 1) {
+            novosErros.supplier = 'Fornecedor inválido';
+        }
+
+        if (form.barcode.toString().length !== 7) {
+            novosErros.barcode = 'Insira um código de 7 dígitos';
+        }
+
+        console.log(Object.keys(novosErros).length)
+
+        if (Object.keys(novosErros).length === 0) {
+            console.log("foi")
+            return true;
+        } else {
+            setError(novosErros);
+            console.log("ero")
+        
+            return false
+        }
+    }
 
 
     const editProduct = (index: number) => {
-        let tempArray = data.products;
-        tempArray[index] = {
-            id: tempArray[index].id,
-            name: name,
-            price: price,
-            supplier: supplier,
-            barcode: barcode,
-        }
+        if(validarCampos()){
+            console.log("validou")
+            let tempArray = data.products;
+            tempArray[index] = form;
 
-        setData({...data, products: tempArray});
+            setData({...data, products: tempArray});
 
-        try{
-            updateAPI(data.id, data);
+            try{
+                updateAPI(data.id, data);
+            }
+            catch (error){
+                console.log("F");
+            }
+            setError({});
+            setEditMode(false);
         }
-        catch (error){
-            console.log("F");
-        }
-        setEditMode(false);
     }
 
     const cancelEdit = () => {
-        setName(item.name);
-        setPrice(item.price);
-        setSupplier(item.supplier);
-        setBarcode(item.barcode);
+        setForm({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            supplier: item.supplier,
+            barcode: item.barcode,
+        })
         setEditMode(false);
     }
 
     return {
-        name,
-        setName,
-        price,
-        setPrice,
-        supplier,
-        setSupplier,
-        barcode,
-        setBarcode,
+        form,
+        handleName,
+        handlePrice,
+        handleSupplier,
+        handleBarcode,
         editMode,
         setEditMode,
         editProduct,
+        error,
         cancelEdit,
     }
 }

@@ -1,0 +1,46 @@
+.cardItem{
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
+    flex-wrap: wrap;
+    flex-direction: column;
+
+    p{   
+        font-size: calc(8px + 1vmin);
+        font-weight: bold;
+    }
+}
+
+.itemInfo{
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+.inputDiv{
+    font-size: calc(8px + 1vmin);
+
+    input{
+        width: -webkit-fill-available;
+        border-radius: 6px;
+        padding: 8px;
+    }
+}
+
+.error{
+    color: rgb(210, 27, 64);
+    font-weight: 700;
+    margin: 5px 0;
+}
+
+.buttonAddDiv{
+    margin-top: 10px;
+    text-align: right;
+    display: flex;
+    justify-content: space-between;
+}
+
+.button{
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+}

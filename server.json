@@ -2,8 +2,8 @@
   "user": [
     {
       "id": 1,
-      "user": "testuser",
-      "password": "testpassword",
+      "user": "teste",
+      "password": "teste123",
       "birth": "01/01/2024",
       "cpf": 12345678910,
       "products": [
@@ -11,8 +11,8 @@
           "id": 1,
           "name": "prato",
           "price": 5.78,
-          "supplier": "bic",
-          "barcode": 1557894
+          "supplier": "eita",
+          "barcode": 1557897
         },
         {
           "id": 2,
@@ -20,43 +20,24 @@
           "price": 5.78,
           "supplier": "eita",
           "barcode": 1557894
+        },
+        {
+          "id": 3,
+          "name": "caderno",
+          "price": 15.5,
+          "supplier": "tilibra",
+          "barcode": 1478978
         }
       ]
     },
     {
-      "user": "eu",
-      "password": "eu",
+      "user": "edut23",
+      "password": "edut23",
       "name": "edu",
-      "cpf": "123",
-      "birth": "1001-01-23",
-      "products": [
-        {
-          "id": 1,
-          "name": "adad",
-          "price": 55,
-          "supplier": "wede",
-          "barcode": 1258
-        }
-      ],
+      "cpf": "147.852.963-23",
+      "birth": "2008-01-23",
+      "products": [],
       "id": 2
-    },
-    {
-      "user": "testuser",
-      "password": "testpassword",
-      "name": "Fulano da Silva",
-      "cpf": "11022033044",
-      "birth": "1999-02-15",
-      "products": [],
-      "id": 3
-    },
-    {
-      "user": "testuser",
-      "password": "testpassword",
-      "name": "Fulano da Silva",
-      "cpf": "",
-      "birth": "1999-02-15",
-      "products": [],
-      "id": 4
     }
   ]
 }

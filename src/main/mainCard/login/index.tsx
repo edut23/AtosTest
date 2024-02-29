@@ -11,7 +11,7 @@ interface Products{
 
 interface Data{
     id: number,
-user: string,
+    user: string,
     password: string,
     name: string,
     cpf: string,
@@ -38,7 +38,7 @@ const Login = ({setPage, setData}: LoginProps) => {
 
     return(
         <form>
-            {error && <p title='error'>{error}</p>}
+            {error && <p title='error' className='error'>{error}</p>}
             <div className='inputDiv'>
                 <h2>Usuário:</h2>
                 <input type='text' placeholder='Usuário' className='user' value={username} onChange={e => setUsername(e.target.value)}/>
@@ -47,9 +47,11 @@ const Login = ({setPage, setData}: LoginProps) => {
                 <h2>Senha:</h2>
                 <input type='password' placeholder='Senha' value={password} onChange={e => setPassword(e.target.value)}/>
             </div>
-            <button type='submit' onClick={e => handleSubmit(e)}>Entrar</button>
+            <div className='buttonDiv'>
+                <button type='submit' className='button' onClick={e => handleSubmit(e)}>Entrar</button>
+            </div>
             <div className='signUpText'>
-                <h2>Ainda não se cadastrou? <i onClick={() => setPage('signup')}>Cadastre-se</i></h2>
+                <h2>Ainda não se cadastrou? <i className='changeSign' onClick={() => setPage('signup')}>Cadastre-se</i></h2>
             </div>
         </form>
     )

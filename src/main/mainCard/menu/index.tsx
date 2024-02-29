@@ -1,5 +1,6 @@
 import useMenu from "../../../hook/useMenu"
 import Item from "./item";
+import './index.css';
 
 interface Products{
     id: number,
@@ -27,14 +28,12 @@ interface MenuProps{
 
 const Menu = ({setPage, data, setData}: MenuProps) => {
     const {
-        name,
-        setName,
-        price,
-        setPrice,
-        supplier,
-        setSupplier,
-        barcode,
-        setBarcode,
+        form,
+        handleName,
+        handlePrice,
+        handleSupplier,
+        handleBarcode,
+        error,
         addMode,
         setAddmode,
         addProduct,
@@ -42,32 +41,54 @@ const Menu = ({setPage, data, setData}: MenuProps) => {
 
     return(
         <div>
-            <div>
+            <div className="cardItem">
                 {data?.products && data?.products.map((item, index) => 
                     <Item item={item} index={index} setPage={setPage} data={data} setData={setData}/>
                 )}
                 {addMode &&
                     <div>
-                        <p>Nome do produto:</p>
-                        <input type='text' title={name} value={name} onChange={e => setName(e.target.value)}/>
-                        <p>Preço:</p>
-                        <input type='number' value={price} onChange={e => setPrice(parseFloat(e.target.value))}/>
-                        <p>Fornecedor:</p>
-                        <input type='text' value={supplier} onChange={e => setSupplier(e.target.value)}/>
-                        <p>Id:</p>
-                        <input type='number' value={data?.products?.length + 1} disabled={true}/>
-                        <p>Código de barras:</p>
-                        <input type='number' value={barcode} onChange={e => setBarcode(parseInt(e.target.value))}/>
-                        <button onClick={() => setAddmode(false)}>
-                            Cancelar
-                        </button>
-                        <button onClick={() => addProduct()}>
-                            Salvar
-                        </button>
+                        <p className="itemInfo">Nome do produto:</p>
+                        <div className="inputDiv">
+                            <input type='text' title={form.name} value={form.name} onChange={e => handleName(e.target.value)}/>
+                            {error.name && <p title='error' className="error">{error.name}</p>}
+                        </div>
+                        <p className="itemInfo">Preço:</p>
+                        <div className="inputDiv">
+                            <input type='number' value={form.price} onChange={e => handlePrice(parseFloat(e.target.value))}/>
+                            {error.price && <p title='error' className="error">{error.price}</p>}
+                        </div>
+                        <p className="itemInfo">Fornecedor:</p>
+                        <div className="inputDiv">
+                            <input type='text' value={form.supplier} onChange={e => handleSupplier(e.target.value)}/>
+                            {error.supplier && <p title='error' className="error">{error.supplier}</p>}
+                        </div>
+                        <p className="itemInfo">Id:</p>
+                        <div className="inputDiv">
+                            <input type='number' value={data?.products.length + 1} disabled={true}/>
+                        </div>
+                        <p className="itemInfo">Código de barras:</p>
+                        <div className="inputDiv">
+                            <input type='number' value={form.barcode} onChange={e => handleBarcode(parseInt(e.target.value))}/>
+                            {error.barcode && <p title='error' className="error">{error.barcode}</p>}
+                        </div>
+                        <div className="buttonAddDiv">
+                            <button className="button" onClick={() => setAddmode(false)}>
+                                Cancelar
+                            </button>
+                            <button className="button" onClick={() => addProduct()}>
+                                Salvar
+                            </button>
+                        </div>
                     </div>
                 }
             </div>
-            {!addMode && <button onClick={() => setAddmode(true)}>Adicionar Produto</button>}
+            <div className="buttonAddDiv">
+                {!addMode && 
+                <>
+                    <button className="button add" onClick={() => setPage('login')}>Sair</button>
+                    <button className="button add" onClick={() => setAddmode(true)}>Adicionar Produto</button>
+                </>}
+            </div>
         </div>
     )
 }

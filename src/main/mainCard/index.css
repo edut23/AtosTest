@@ -6,6 +6,11 @@
     border-radius: 8px;
     margin-top: auto;
     margin-bottom: auto;
+    border: 2.5px #000 solid;
+
+    @media(max-width: 900px){
+        width: 70%;
+    }
 }
 
 h2{

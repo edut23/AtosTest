@@ -1,5 +1,5 @@
 .App {
-  background-color: #282c34;
+  background-color: #7719f4;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -20,6 +20,8 @@
 
 h1 {
   margin: 0;
+  -webkit-text-stroke-width: 1.5px;
+  -webkit-text-stroke-color: #000;
 }
 
 

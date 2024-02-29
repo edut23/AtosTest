@@ -12,7 +12,7 @@ interface Products{
 
 interface Data{
     id: number,
-user: string,
+    user: string,
     password: string,
     name: string,
     cpf: string,

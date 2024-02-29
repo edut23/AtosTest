@@ -3,6 +3,12 @@ h2{
     margin-bottom: 10px;
 }
 
+.error{
+    color: rgb(210, 27, 64);
+    font-weight: 700;
+    margin: 5px 0;
+}
+
 .inputDiv{
     font-size: calc(8px + 1vmin);
     margin-bottom: 15px;
@@ -20,6 +26,12 @@ h2{
     font-size: calc(6px + 1vmin);
 }
 
-i{
-    cursor: pointer;
+.buttonDiv{
+    text-align: right;
+}
+
+.button{
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
 }

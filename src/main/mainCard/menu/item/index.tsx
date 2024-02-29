@@ -1,4 +1,5 @@
 import useItem from "../../../../hook/useItem";
+import './index.css';
 
 interface Products{
     id: number,
@@ -29,39 +30,54 @@ interface ItemProps{
 
 const Item = ({item, index, setPage, data, setData}: ItemProps) => {
     const {
-        name,
-        setName,
-        price,
-        setPrice,
-        supplier,
-        setSupplier,
-        barcode,
-        setBarcode,
+        form,
+        handleName,
+        handlePrice,
+        handleSupplier,
+        handleBarcode,
         editMode,
         setEditMode,
         editProduct,
+        error,
         cancelEdit
     } = useItem({item, data, setData});
 
     return(
-        <div>
-            <p>Nome do produto:</p>
-            <input type='text' title={name} value={name} onChange={e => setName(e.target.value)} disabled={!editMode}/>
-            <p>Preço:</p>
-            <input type='number' value={price} onChange={e => setPrice(parseFloat(e.target.value))} disabled={!editMode}/>
-            <p>Fornecedor:</p>
-            <input type='text' value={supplier} onChange={e => setSupplier(e.target.value)} disabled={!editMode}/>
-            <p>Id:</p>
-            <input type='number' value={item.id} disabled={true}/>
-            <p>Código de barras:</p>
-            <input type='number' value={barcode} onChange={e => setBarcode(parseInt(e.target.value))} disabled={!editMode}/>
-            <button onClick={() => {editMode ? editProduct(index)  : setEditMode(!editMode)}}>
-                {editMode ? "Salvar" : "Editar produto"}
-            </button>
+        <div className="itemDiv">
+            <p className="itemInfo">Nome do produto:</p>
+            <div className="inputDiv">
+                <input type='text' title={form.name} value={form.name} onChange={e => handleName(e.target.value)} disabled={!editMode}/>
+                {error.name && <p title='error' className="error">{error.name}</p>}
+            </div>
+            <p className="itemInfo">Preço:</p>
+            <div className="inputDiv">
+                <input type='number' value={form.price} onChange={e => handlePrice(parseFloat(e.target.value))} disabled={!editMode}/>
+                {error.price && <p title='error' className="error">{error.price}</p>}
+            </div>
+            <p className="itemInfo">Fornecedor:</p>
+            <div className="inputDiv">    
+                <input type='text' value={form.supplier} onChange={e => handleSupplier(e.target.value)} disabled={!editMode}/>
+                {error.supplier && <p title='error' className="error">{error.supplier}</p>}
+            </div>
+            <p className="itemInfo">Id:</p>
+            <div className="inputDiv"> 
+                <input type='number' value={item.id} disabled={true}/>
+            </div>
+            <p className="itemInfo">Código de barras:</p>
+            <div className="inputDiv">
+                <input type='number' value={form.barcode} onChange={e => handleBarcode(parseInt(e.target.value))} disabled={!editMode}/>
+                {error.barcode && <p title='error' className="error">{error.barcode}</p>}
+            </div>
+            <div className="buttonItemDiv">
+                <button className="button" onClick={() => {editMode ? editProduct(index)  : setEditMode(!editMode)}}>
+                    {editMode ? "Salvar" : "Editar produto"}
+                </button>
             {editMode && 
-            <button onClick={() => cancelEdit()}>
-                Cancelar
-            </button>}
+                <button className="button" onClick={() => cancelEdit()}>
+                    Cancelar
+                </button>
+            }
+            </div>
         </div>
     )
 }
