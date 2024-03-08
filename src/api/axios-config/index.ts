@@ -4,7 +4,7 @@ import { responseInterceptor } from "./interceptor";
 import { errorInterceptor } from "./interceptor";
 
 const Api = axios.create({
-    baseURL: "http://localhost:3000"
+    baseURL: "http://localhost:8000"
 });
 
 Api.interceptors.response.use(

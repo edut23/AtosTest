@@ -1,0 +1,107 @@
+.formDiv{
+    @media(min-width: 1200px){    
+        padding: 0 30%;
+    }
+}
+
+h1.title{
+    margin: 0;
+    margin-bottom: 28px;
+    font-family: roboto;
+    font-size: 36px;
+    font-weight: 400;
+    line-height: 36px;
+    letter-spacing: 0.01em;
+    text-align: left;
+}
+
+h2.subtitle{
+    margin: 0;
+    margin-bottom: 48px;
+    font-family: roboto;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 32px;
+    letter-spacing: 0.01em;
+    text-align: left;
+}
+
+.error{
+    color: rgb(210, 27, 64);
+    font-weight: 700;
+}
+
+.inputDiv{
+    font-size: 16px;
+    margin-bottom: 24px;
+
+    p{
+        margin: 0;
+        margin-bottom: 8px;
+    }
+
+    input{
+        width: -webkit-fill-available;
+        border-radius: 12px;
+        padding: 16px;
+        border: 1px solid #D4D7E3;
+        background-color: #F7FBFF;
+    }
+}
+
+.signUpText{
+    margin-top: 25px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 28.8px;
+
+    h2{
+        font-family: roboto;
+        font-weight: 400;
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        font-size: 18px;
+        line-height: 28.8px;
+    }
+}
+
+.orLine{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 48px 0;
+
+    .line{
+        border-bottom: 1px solid #888;
+        width: 100%;
+    }
+
+    p{
+        font-family: roboto;
+        font-size: 16px;
+        font-weight: 400;
+        margin: 0 8px;
+    }
+}
+
+p.changeSign{
+    cursor: pointer;
+    color: #1E4AE9;
+    margin: 0;
+}
+
+.buttonDiv{
+    text-align: center;
+}
+
+.button{
+    color: #FFFFFF;
+    background-color: #89131D;
+    width: 100%;
+    padding: 16px;
+    border-radius: 12px;
+    border: none;
+    font-size: 15px;
+    font-weight: bold;
+}

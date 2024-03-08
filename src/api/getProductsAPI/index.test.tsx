@@ -1,8 +1,8 @@
-import { updateAPI } from '.';
+import { getProductsAPI } from '.';
 import { Api } from '../axios-config';
 import MockAdapter from 'axios-mock-adapter';
 
-// Criando uma instância do mock adapter, passando a instância do axios
+/* Criando uma instância do mock adapter, passando a instância do axios
 const mock = new MockAdapter(Api);
 
 describe('updateAPI', () => {
@@ -41,4 +41,4 @@ describe('updateAPI', () => {
     expect(mock.history.put[0].url).toBe(`/user/${id}`);
     expect(JSON.parse(mock.history.put[0].data)).toEqual(product);
   });
-});
+});*/

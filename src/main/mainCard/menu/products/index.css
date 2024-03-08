@@ -1,0 +1,23 @@
+.productsDiv{
+    margin-left: 15%;
+    padding: 10px 10px 0 10px;
+    font-style: roboto;
+
+    h1{
+        font-size: 26px;
+        font-weight: 600;
+        color: black;
+    }
+
+    h2{
+        font-size: 20px;
+        font-weight: 700;
+        color: black;
+    }
+
+    h3{
+        font-size: 14px;
+        font-weight: 400;
+        color: #898989;
+    }
+}

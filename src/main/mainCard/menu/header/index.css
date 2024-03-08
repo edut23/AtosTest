@@ -1,0 +1,15 @@
+.header{
+    color: black;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.searchBar{
+    background-color: #F9F9F9;
+    border-radius: 4px;
+    border: none;
+    height: 60%;
+    padding: 10px;
+}

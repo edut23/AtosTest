@@ -1,6 +1,6 @@
 .App {
-  background-color: #7719f4;
-  min-height: 100vh;
+  background-color: #FFFFFF;
+  height: auto;
   display: flex;
   flex-direction: column;
   font-size: calc(10px + 1vmin);
@@ -23,6 +23,5 @@ h1 {
   justify-content: center;
   align-content: center;
   width: 100%;
-  min-height: 80vh;
-  margin: 3% 0;
+  height: 100vh;
 }

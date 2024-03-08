@@ -3,19 +3,16 @@ import { Api } from "../axios-config";
 //import MockAdapter from "axios-mock-adapter";
 
 interface Item{
-    user: string,
-    password: string,
+    email: string,
     name: string,
-    cpf: string,
-    birth: string,
-    products: [],
+    password: string,
   }
 
-export const signUpAPI = async (info: Item): Promise<boolean | Error> => {
+export const signUpAPI = async (info: Item): Promise<string | Error> => {
     try{
-        await Api.post('/user', info);
+        const {data} = await Api.post('/auth/register', info);
 
-        return true;
+        return data;
     } catch (error) {
         console.error(error)
         return new Error((error as { message: string}).message || 'Listing movies error.')

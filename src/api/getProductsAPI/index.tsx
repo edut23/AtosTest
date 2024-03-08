@@ -18,11 +18,12 @@ interface Data{
     products: Products[],
 }
 
-export const updateAPI = async (id: number, product: Data): Promise<void | Error> => {
+export const getProductsAPI = async (token: string): Promise<[] | Error> => {
 
     try{
-        await Api.put(`/user/${id}`, product);
+        const {data} = await Api.get(`/products`, {headers: { 'Authorization' : `Bearer ${token}`}});
 
+        return data
     } catch (error) {
         return new Error((error as { message: string}).message || 'Update error.')
     }

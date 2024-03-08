@@ -2,22 +2,16 @@ import { useState } from "react";
 import { signUpAPI } from "../api/signUpAPI";
 
 interface SignUpInfo{
-    user: string,
-    password: string,
+    email: string,
     name: string,
-    cpf: string,
-    birth: string,
-    products: [],
+    password: string,
 }
 
-const useSignUp = (setPage: React.Dispatch<React.SetStateAction<string>>) => {
+const useSignUp = (setPage: React.Dispatch<React.SetStateAction<string>>, setAuth: React.Dispatch<React.SetStateAction<string>>) => {
     const [form, setForm] = useState<SignUpInfo>({
-        user: '',
-        password: '',
+        email: '',
         name: '',
-        cpf: '',
-        birth: '',
-        products: [],
+        password: '',
     })
     const [confirmPassword, setConfirmPassword] = useState('');
     const [confirmError, setConfirmError] = useState('');
@@ -28,7 +22,7 @@ const useSignUp = (setPage: React.Dispatch<React.SetStateAction<string>>) => {
     }
 
     const handleUsername = (value: string) =>{
-        setForm({...form, user: value});
+        setForm({...form, email: value});
     }
 
     const handlePassword = (value: string) =>{
@@ -42,23 +36,6 @@ const useSignUp = (setPage: React.Dispatch<React.SetStateAction<string>>) => {
         else{
             setConfirmError("Sua senha esta divergindo da confirmação");
         }
-    }
-
-    const handleBirth = (value: string) =>{
-        setForm({...form, birth: value});
-    }
-
-    const cpfMask = (value: string) => {
-        return value
-        .replace(/\D/g, '') // substitui qualquer caracter que nao seja numero por nada
-        .replace(/(\d{3})(\d)/, '$1.$2') // captura 2 grupos de numero o primeiro de 3 e o segundo de 1, apos capturar o primeiro grupo ele adiciona um ponto antes do segundo grupo de numero
-        .replace(/(\d{3})(\d)/, '$1.$2')
-        .replace(/(\d{3})(\d{1,2})/, '$1-$2')
-        .replace(/(-\d{2})\d+?$/, '$1')
-    }
-
-    const handleCpf = (value: string) => {
-        setForm({...form, cpf: cpfMask(value)});
     }
 
     const validarCampos = () => {
@@ -76,16 +53,8 @@ const useSignUp = (setPage: React.Dispatch<React.SetStateAction<string>>) => {
             setConfirmError("Sua senha esta divergindo da confirmação");
         }
       
-        if (form.user.trim() === '' && form.user.length < 5) {
-            novosErros.user = 'Seu nome de usuário deve ter no minímo 5 caracteres';
-        }
-
-        if (form.birth.trim() === '' && form.birth.length < 5) {
-            novosErros.birth = 'Preencha sua data de nascimento';
-        }
-
-        if (form.cpf.trim() === '' && form.cpf.length !== 14){
-            novosErros.cpf = 'Preencha seu CPF corretamente';
+        if (form.email.trim() === '' && form.email.length < 5) {
+            novosErros.email = 'Seu nome de usuário deve ter no minímo 5 caracteres';
         }
 
         if (Object.keys(novosErros).length === 0) {
@@ -103,17 +72,19 @@ const useSignUp = (setPage: React.Dispatch<React.SetStateAction<string>>) => {
         if(validarCampos())
             try {
                 const info: SignUpInfo = {
-                    user: form.user,
-                    password: form.password,
+                    email: form.email,
                     name: form.name,
-                    cpf: form.cpf,
-                    birth: form.birth,
-                    products: []
+                    password: form.password,
                 }
-                const check = await signUpAPI(info);
+                const data = await signUpAPI(info);
     
-                if(check)
-                    setPage('login')
+                if(data instanceof Error){
+                    console.error("Erro ao cadastrar")
+                }
+                else{
+                    console.log(data)
+                    setAuth(data);
+                }
             } 
             catch (error) {
                 console.log('Credenciais inválidas');
@@ -128,8 +99,6 @@ const useSignUp = (setPage: React.Dispatch<React.SetStateAction<string>>) => {
         handleConfirmPassword,
         confirmError,
         handleName,
-        handleCpf,
-        handleBirth,
         error,
         handleSubmit
     }

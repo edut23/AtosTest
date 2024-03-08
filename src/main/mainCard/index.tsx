@@ -1,17 +1,20 @@
 import useMain from '../../hook/useMain';
 import './index.css';
-import Login from './login';
-import SignUp from './signUp';
 import Menu from './menu';
+import Start from './start';
+import StartImage from '../../assets/startImage';
 
 const MainCard = () => {
-    const {page, setPage, data, setData} = useMain();
+    const {page, setPage, auth, setAuth} = useMain();
 
     return(
         <div className='main'>
-            {page === 'login' && <Login setPage={setPage} setData={setData}/>}
-            {page === 'signup' && <SignUp setPage={setPage}/>}
-            {page === 'menu' && <Menu setPage={setPage} data={data} setData={setData}/>}
+            {auth === '' && 
+            <>
+                <Start page={page} setPage={setPage} setAuth={setAuth}/>
+                <StartImage/>
+            </>}
+            {auth !== '' && <Menu setPage={setPage} auth={auth}/>}
         </div>
     )
 }

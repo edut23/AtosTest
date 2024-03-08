@@ -22,10 +22,10 @@ interface Data{
 
 interface LoginProps{
     setPage: React.Dispatch<React.SetStateAction<string>>
-    setData: React.Dispatch<React.SetStateAction<Data>>
+    setAuth: React.Dispatch<React.SetStateAction<string>>
 }
 
-const useLogin = ({setPage, setData}: LoginProps) => {
+const useLogin = ({setPage, setAuth}: LoginProps) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -39,8 +39,8 @@ const useLogin = ({setPage, setData}: LoginProps) => {
             if(data instanceof Error)
                 setError('Credenciais inválidas');
             else{
-                setData(data);
-                setPage('menu');
+                console.log(data)
+                setAuth(data);
             }
         } 
         catch (error) {

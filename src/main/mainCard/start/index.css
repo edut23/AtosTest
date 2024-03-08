@@ -1,0 +1,47 @@
+.startCard{
+    padding: 32px;
+    background-color: #FFFFFF;
+    color: black;
+    padding: 20px;
+    width: -webkit-fill-available;
+    letter-spacing: 0.01em;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+    @media(max-width: 900px){
+        width: 70%;
+    }
+}
+
+h2{
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.inputDiv{
+    font-size: calc(8px + 1vmin);
+    margin-bottom: 15px;
+
+    input{
+        width: -webkit-fill-available;
+        border-radius: 6px;
+        padding: 8px;
+    }
+}
+
+.signUpText{
+    margin-top: 25px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 28.8px;
+}
+
+.bottonLogo{
+    position: absolute;
+    bottom: 58px;
+    align-self: center;
+}

@@ -1,36 +1,17 @@
 .main{
-    background-color: #FFFFFF;
-    color: black;
-    width: 50%;
-    padding: 20px;
-    border-radius: 8px;
-    margin-top: auto;
-    margin-bottom: auto;
-    border: 2.5px #000 solid;
-
-    @media(max-width: 900px){
-        width: 70%;
-    }
+    display: flex;
+    width: 100%;
+    gap: 32px;
+    flex-direction: row;
 }
 
-h2{
-    margin: 0;
-    margin-bottom: 10px;
+img{
+    height: -webkit-fill-available;
+    width: -webkit-fill-available;
+    padding: 32px;
 }
 
-.inputDiv{
-    font-size: calc(8px + 1vmin);
-    margin-bottom: 15px;
-
-    input{
-        width: -webkit-fill-available;
-        border-radius: 6px;
-        padding: 8px;
-    }
-}
-
-.signUpText{
-    margin-top: 25px;
-    text-align: center;
-    font-size: calc(6px + 1vmin);
+.bottonLogo{
+    position: absolute;
+    align-self: center;
 }

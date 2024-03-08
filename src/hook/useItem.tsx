@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { updateAPI } from "../api/updateAPI";
+import { getProductsAPI } from "../api/getProductsAPI";
 
 interface Products{
     id: number,
@@ -105,7 +105,7 @@ const useItem = ({item, data, setData}: MenuProps) => {
             setData({...data, products: tempArray});
 
             try{
-                updateAPI(data.id, data);
+                getProductsAPI("bla");
             }
             catch (error){
                 console.log("F");

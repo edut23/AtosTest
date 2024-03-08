@@ -1,5 +1,5 @@
-import { useState } from "react"
-import { updateAPI } from "../api/updateAPI";
+import { useEffect, useState } from "react"
+import { getProductsAPI } from "../api/getProductsAPI";
 
 interface Products{
     id: number,
@@ -27,22 +27,40 @@ interface Data{
     products: Products[],
 }
 
-interface MenuProps{
-    setPage: React.Dispatch<React.SetStateAction<string>>,  
-    data: Data,
-    setData: React.Dispatch<React.SetStateAction<Data>>
+interface MenuProps{ 
+    auth: string,
 }
 
-const useMenu = ({setPage, data, setData}: MenuProps) => {
+const useMenu = (auth: string) => {
     const [addMode, setAddmode] = useState(false);
     const [form, setForm] = useState<Products>({
-        id: data.products.length + 1,
+        id: 1,
         name: '',
         price: 0,
         supplier: '',
         barcode: 0,
     });
     const [error, setError] = useState<Partial<Error>>({});
+    const [products, setProducts] = useState<[]>([])
+
+    const getProducts = async () => {
+        try{
+            const data = getProductsAPI(auth);
+
+            if(data instanceof Error)
+                console.error("data")
+            else{
+                console.log(data)
+            }
+        }
+        catch(error){
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        getProducts();
+    },[])
 
 
     const handleName = (value: string) =>{
@@ -95,20 +113,17 @@ const useMenu = ({setPage, data, setData}: MenuProps) => {
 
     const addProduct = () => {
         if(validarCampos()){
-            let tempArray = data.products;
-            tempArray = [...tempArray, {
-                    id: tempArray.length + 1,
+            let tempArray = [{
+                    id: 1,
                     name: form.name,
                     price: form.price,
                     supplier: form.supplier,
                     barcode: form.barcode
                 }
             ]
-            setData({...data, products: tempArray});
             try{
-                updateAPI(data.id, data);
                 setForm({
-                    id: data.products.length + 1,
+                    id: 1,
                     name: '',
                     price: 0,
                     supplier: '',
@@ -132,6 +147,7 @@ const useMenu = ({setPage, data, setData}: MenuProps) => {
         addMode,
         setAddmode,
         addProduct,
+        products,
     }
 }
 

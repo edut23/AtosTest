@@ -1,3 +1,8 @@
+.menu{
+    width: -webkit-fill-available;
+    position: absolute;
+}
+
 .cardItem{
     display: flex;
     justify-content: space-around;
