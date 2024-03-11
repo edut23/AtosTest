@@ -14,10 +14,10 @@ interface Data{
     data: Products[],
 }
 
-export const getProductsAPI = async (token: string): Promise<Data | Error> => {
+export const DeleteProductsAPI = async (id: number ,token: string): Promise<Data | Error> => {
 
     try{
-        const {data} = await Api.get(`/products`, {headers: { 'Authorization' : `Bearer ${token}`}});
+        const {data} = await Api.delete(`/products${id}`, {headers: { 'Authorization' : `Bearer ${token}`}});
 
         return {data}
     } catch (error) {

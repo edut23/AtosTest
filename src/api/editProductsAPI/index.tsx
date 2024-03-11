@@ -14,10 +14,10 @@ interface Data{
     data: Products[],
 }
 
-export const getProductsAPI = async (token: string): Promise<Data | Error> => {
+export const EditProductsAPI = async (id: number, Product: Products, token: string): Promise<Data | Error> => {
 
     try{
-        const {data} = await Api.get(`/products`, {headers: { 'Authorization' : `Bearer ${token}`}});
+        const {data} = await Api.patch(`/products/${id}`, Product, {headers: { 'Authorization' : `Bearer ${token}`}});
 
         return {data}
     } catch (error) {

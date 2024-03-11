@@ -1,66 +1,65 @@
 import { useEffect, useState } from "react"
 import { getProductsAPI } from "../api/getProductsAPI";
+import { PostProductsAPI } from "../api/postProductsAPI";
+import { EditProductsAPI } from "../api/editProductsAPI";
+
+interface Error{
+    id: number,
+    name: string,
+    cost: string,
+    category: string,
+    date: string,
+    productId: number
+}
 
 interface Products{
     id: number,
     name: string,
-    price: number,
-    supplier: string,
-    barcode: number,
-}
-
-interface Error{
-    id: string,
-    name: string,
-    price: string,
-    supplier: string,
-    barcode: string,
-}
-
-interface Data{
-    id: number,
-    user: string,
-    password: string,
-    name: string,
-    cpf: string,
-    birth: string,
-    products: Products[],
-}
-
-interface MenuProps{ 
-    auth: string,
+    cost: number,
+    category: string,
+    date: string,
+    productId: number,
+    units: number
 }
 
 const useMenu = (auth: string) => {
-    const [addMode, setAddmode] = useState(false);
+    const [addMode, setAddmode] = useState("off");
     const [form, setForm] = useState<Products>({
         id: 1,
-        name: '',
-        price: 0,
-        supplier: '',
-        barcode: 0,
+        name: "",
+        cost: 1,
+        category: "",
+        productId: 1,
+        date: "",
+        units: 1
     });
+    const [unit, setUnits] = useState(1);
     const [error, setError] = useState<Partial<Error>>({});
-    const [products, setProducts] = useState<[]>([])
-
-    const getProducts = async () => {
-        try{
-            const data = getProductsAPI(auth);
-
-            if(data instanceof Error)
-                console.error("data")
-            else{
-                console.log(data)
-            }
-        }
-        catch(error){
-            console.log(error)
-        }
-    }
+    const [products, setProducts] = useState<Products[]>([]);
+    const [key, setKey] = useState(-1);
 
     useEffect(() => {
-        getProducts();
-    },[])
+        getData();
+    },[addMode])
+
+    const getData = async () => {
+        if(addMode === "off")
+            getProductsAPI(auth)
+                .then((result) => {
+                    if (result instanceof Error) {
+                        alert(result.message)
+                    }
+                    else {
+                        let temp: Products[] = [];
+                        result.data.map((item) => {
+                            temp = [...temp, item];
+
+                            return temp
+                        })
+                        setProducts(temp);
+                    }
+                })
+    }
 
 
     const handleName = (value: string) =>{
@@ -68,15 +67,19 @@ const useMenu = (auth: string) => {
     }
 
     const handlePrice = (value: number) =>{
-        setForm({...form, price: value});
+        setForm({...form, cost: value});
     }
 
-    const handleSupplier = (value: string) =>{
-        setForm({...form, supplier: value});
+    const handleCategory = (value: string) =>{
+        setForm({...form, category: value});
     }
 
-    const handleBarcode = (value: number) =>{
-        setForm({...form, barcode: value});
+    const handleProductId = (value: number) =>{
+        setForm({...form, productId: value});
+    }
+
+    const handleUnit = (value: number) => {
+        setForm({...form, units: value});
     }
 
     const validarCampos = () => {
@@ -86,16 +89,8 @@ const useMenu = (auth: string) => {
           novosErros.name = 'Insira um nome com mais de um caractere';
         }
       
-        if (form.price < 0.01) {
-            novosErros.price = 'O valor do produto deve ser mais que R$0,01';
-        }
-      
-        if (form.supplier.trim() === '' && form.supplier.length < 1) {
-            novosErros.supplier = 'Insira um fornecedor com mais de um caractere';
-        }
-
-        if (form.barcode.toString().length !== 7) {
-            novosErros.barcode = 'Insira um código de 7 dígitos';
+        if (form.cost < 0.01) {
+            novosErros.cost = 'O valor do produto deve ser mais que R$0,01';
         }
 
         console.log(Object.keys(novosErros).length)
@@ -111,26 +106,82 @@ const useMenu = (auth: string) => {
         }
     }
 
-    const addProduct = () => {
+    const addProduct = async () => {
         if(validarCampos()){
-            let tempArray = [{
-                    id: 1,
+            let tempArray = {
+                    id: form.productId,
                     name: form.name,
-                    price: form.price,
-                    supplier: form.supplier,
-                    barcode: form.barcode
+                    cost: form.cost,
+                    category: form.category,
+                    productId: form.productId,
+                    date: new Date().toLocaleDateString("pt-BR"),
+                    units: form.units
                 }
-            ]
             try{
+                await PostProductsAPI(tempArray, auth)
+                .then((result) => {
+                    if (result instanceof Error) {
+                        alert(result.message)
+                    }
+                    else
+                        console.log("foi")
+                })
                 setForm({
                     id: 1,
-                    name: '',
-                    price: 0,
-                    supplier: '',
-                    barcode: 0,
+                    name: "",
+                    cost: 1,
+                    category: "",
+                    productId: 1,
+                    date: "",
+                    units: 1
                 })
                 setError({})
-                setAddmode(false);    
+                setAddmode("off");    
+            }
+            catch (error){
+            }
+        }
+    }
+
+    const editProduct = (key: number) => {
+        setKey(key);
+        setForm(products[key]);
+        handleUnit(Math.floor(Math.random() * 20));
+        setAddmode("edit");
+    };
+
+    const confirmEdit = async() => {
+        if(validarCampos()){
+            let tempArray = {
+                    id: form.id,
+                    name: form.name,
+                    cost: form.cost,
+                    category: form.category,
+                    productId: form.productId,
+                    date: form.date,
+                    units: form.units
+                }
+            try{
+                await EditProductsAPI(form.id, tempArray, auth)
+                .then((result) => {
+                    if (result instanceof Error) {
+                        alert(result.message)
+                    }
+                    else
+                        console.log("foi")
+                })
+                setForm({
+                    id: 1,
+                    name: "",
+                    cost: 1,
+                    category: "",
+                    productId: 1,
+                    date: "",
+                    units: 1
+                })
+                setError({})
+                setAddmode("off");
+                setKey(-1);    
             }
             catch (error){
             }
@@ -141,13 +192,18 @@ const useMenu = (auth: string) => {
         form,
         handleName,
         handlePrice,
-        handleSupplier,
-        handleBarcode,
+        handleCategory,
+        handleProductId,
+        handleUnit,
+        unit,
         error,
         addMode,
         setAddmode,
         addProduct,
         products,
+        editProduct,
+        confirmEdit,
+        key
     }
 }
 

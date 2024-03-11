@@ -6,18 +6,17 @@ interface Products{
     cost: number,
     category: string,
     date: string,
-    productId: number,
-    units: number
+    productId: number
 }
 
 interface Data{
     data: Products[],
 }
 
-export const getProductsAPI = async (token: string): Promise<Data | Error> => {
+export const PostProductsAPI = async (Product: Products ,token: string): Promise<Data | Error> => {
 
     try{
-        const {data} = await Api.get(`/products`, {headers: { 'Authorization' : `Bearer ${token}`}});
+        const {data} = await Api.post(`/products`, Product, {headers: { 'Authorization' : `Bearer ${token}`}});
 
         return {data}
     } catch (error) {

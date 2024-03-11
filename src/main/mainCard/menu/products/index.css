@@ -1,7 +1,15 @@
 .productsDiv{
     margin-left: 15%;
     padding: 10px 10px 0 10px;
-    font-style: roboto;
+    font-family: "roboto";
+    background-color: #F9F9F9;
+    height: -webkit-fill-available;
+
+    .titleSection{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
     h1{
         font-size: 26px;
@@ -20,4 +28,32 @@
         font-weight: 400;
         color: #898989;
     }
+
+    table{
+        background-color: #FFFFFF;
+        color: #000000;
+        border-radius: 12px;
+        width: 100%;
+
+        thead{
+            text-align: left;
+        }
+    }
+}
+
+.center{
+    text-align: center;
+}
+
+.addButton{
+        background-color: #89131D;
+        border-radius: 8px;
+        padding: 15px;
+        color: #FFFFFF;
+        border: none;
+        height: fit-content;
+}
+
+.registerTitle{
+    margin-bottom: 40px;
 }
