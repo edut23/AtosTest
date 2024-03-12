@@ -12,7 +12,7 @@ Execute yarn start or npm start and press y to run on another port.
 
 ### Default user.
 
-Use the default user login (user: teste123, password: teste123) or sign up at purple text "Cadastre-se".
+Use the default user login (user: edut23@gmail.com, password: edu) or sign up at purple text "Cadastre-se".
 
 ### `npm test`
 
