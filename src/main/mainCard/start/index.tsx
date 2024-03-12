@@ -16,7 +16,7 @@ const Start = ({page, setPage, setAuth, setUsername}: StartProps) => {
         <div className={page !== 'menu'  ? 'startCard' : 'menu'}>
             {page === 'login' && <Login setPage={setPage} setAuth={setAuth} saveUsername={setUsername}/>}
             {page === 'signup' && <SignUp setPage={setPage} setAuth={setAuth} setUsername={setUsername}/>}
-            <div className='bottonLogo'>
+            <div className={`bottonLogo ${page}`}>
                 <AtosLogo/>
             </div>
         </div>

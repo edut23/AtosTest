@@ -1,5 +1,5 @@
 .formDiv{
-    @media(min-width: 1200px){    
+    @media(min-width: 1590px){    
         padding: 0 30%;
     }
 }
@@ -50,7 +50,6 @@ h2.subtitle{
 }
 
 .signUpText{
-    margin-top: 25px;
     text-align: center;
     font-size: 18px;
     line-height: 28.8px;
@@ -70,7 +69,7 @@ h2.subtitle{
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: 48px 0;
+    margin: 1.5em 0;
 
     .line{
         border-bottom: 1px solid #888;

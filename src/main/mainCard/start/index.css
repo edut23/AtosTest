@@ -34,7 +34,6 @@ h2{
 }
 
 .signUpText{
-    margin-top: 25px;
     text-align: center;
     font-size: 18px;
     line-height: 28.8px;
@@ -44,4 +43,18 @@ h2{
     position: absolute;
     bottom: 58px;
     align-self: center;
+    text-align-last: center;
+
+    @media(max-width: 1600px){    
+        bottom: 0%;
+    }
+}
+
+.signup{
+    @media(max-width: 1600px){    
+        bottom: 0%;
+        img{
+            padding: 0px !important;
+        }
+    }
 }

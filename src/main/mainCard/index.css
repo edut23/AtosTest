@@ -15,7 +15,6 @@ img{
     padding: 32px;
 }
 
-.bottonLogo{
-    position: absolute;
-    align-self: center;
+.fix{
+    max-width: 50%;
 }

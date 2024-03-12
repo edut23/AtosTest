@@ -12,7 +12,7 @@ const MainCard = () => {
             {auth === '' && 
             <>
                 <Start page={page} setPage={setPage} setUsername={setUsername} setAuth={setAuth}/>
-                <StartImage/>
+                <div className='fix'><StartImage/></div>
             </>}
             {auth !== '' && <Menu username={username} auth={auth}/>}
         </div>
