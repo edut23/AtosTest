@@ -1,8 +1,4 @@
 import { Api } from "../axios-config";
-<<<<<<< HEAD
-//import axios from "axios";
-//import MockAdapter from "axios-mock-adapter"; 
-=======
 
 interface Products{
     id: number,
@@ -21,7 +17,6 @@ interface Item{
     birth: string,
     products: Products[],
 }
->>>>>>> 24ebdde8ea7aecd79089bd0319fb03b9f7c1bf56
 
 
 export const loginApi = async (email: string, password: string): Promise<string | Error> => {
