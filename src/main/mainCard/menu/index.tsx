@@ -1,16 +1,15 @@
 import useMenu from "../../../hook/useMenu"
-import Item from "./item";
 import Header from "./header";
 import './index.css';
 import SubMenu from "./subMenu";
 import ProductsList from "./products";
 
 interface MenuProps{
-    setPage: React.Dispatch<React.SetStateAction<string>>,  
+    username: string,  
     auth: string,
 }
 
-const Menu = ({setPage, auth}: MenuProps) => {
+const Menu = ({username, auth}: MenuProps) => {
     const {
         products
     } = useMenu(auth);
@@ -18,6 +17,7 @@ const Menu = ({setPage, auth}: MenuProps) => {
     return(
         <div className="menu">
             <SubMenu/>
+            <Header username={username}/>
             <ProductsList products={products} auth={auth}/>
         </div>
     )

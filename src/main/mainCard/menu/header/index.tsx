@@ -1,13 +1,25 @@
 import React from "react";
 import "./index.css"
+import UserImage from "../../../../assets/userImage";
+import NotificationIcon from "../../../../assets/notificationIcon";
+import HelpIcon from "../../../../assets/helpIcon";
+import SearchIcon from "../../../../assets/searchIcon";
 
-const Header = () => {
+interface HeaderProps{
+    username: string,  
+}
+
+const Header = ({username}: HeaderProps) => {
     return (
         <div className="header">
-            <input className="searchBar" placeholder="Procurar..."/>
-            <h1>help</h1>
-            <h2>icon</h2>
-            <h3>usuario</h3>
+            <div className="searchBar">
+                <SearchIcon/>
+                Procurar...
+            </div>
+            <HelpIcon/>
+            <NotificationIcon/>
+            <UserImage/>
+            <h3>{username}</h3>
         </div>
     )
 }

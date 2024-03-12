@@ -18,7 +18,6 @@ interface RegisterProps {
     handlePrice: (e: number) => void,
     handleProductId: (e: number) => void,
     handleUnit: (e: number) => void,
-    unit: number
     addProduct: () => void,
 }
 
@@ -32,23 +31,23 @@ const Register = (props: RegisterProps) => {
             <div className="inputDiv">
                 <div className="registerInput">
                     <p>Descrição</p>
-                    <input placeholder="Descrição do produto" value={props.form?.name} onChange={(e) => props.handleName(e.target.value)}/>
+                    <input placeholder="Descrição do produto" type="text" value={props.form?.name} onChange={(e) => props.handleName(e.target.value)}/>
                 </div>
                 <div className="registerInput">
                     <p>Categoria</p>
-                    <input placeholder="Categoria do produto" value={props.form?.category} onChange={(e) => props.handleCategory(e.target.value)}/>
+                    <input placeholder="Categoria do produto" type="text" value={props.form?.category} onChange={(e) => props.handleCategory(e.target.value)}/>
                 </div>
                 <div className="registerInput">
                     <p>Código</p>
-                    <input placeholder="Código do Produto" value={props.form?.productId} onChange={(e) => props.handleProductId(parseInt(e.target.value))}/>
+                    <input placeholder="Código do Produto" type="number" value={props.form?.productId} onChange={(e) => props.handleProductId(parseInt(e.target.value))}/>
                 </div>
                 <div className="registerInput">
                     <p>Valor</p>
-                    <input placeholder="Valor do produto" value={props.form?.cost} onChange={(e) => props.handlePrice(parseFloat(e.target.value))}/>
+                    <input placeholder="Valor do produto" type="number" value={props.form?.cost} onChange={(e) => props.handlePrice(parseFloat(e.target.value))}/>
                 </div>
                 <div className="registerInput">
                     <p>Quantiade</p>
-                    <input placeholder="Quantidade do produto" value={props.form?.units} onChange={(e) => props.handleUnit(parseInt(e.target.value))}/>
+                    <input placeholder="Quantidade do produto" type="number" value={props.form?.units} onChange={(e) => props.handleUnit(parseInt(e.target.value))}/>
                 </div>
             </div>
         </div>

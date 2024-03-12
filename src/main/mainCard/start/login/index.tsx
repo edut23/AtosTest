@@ -1,32 +1,15 @@
 import useLogin from '../../../../hook/useLogin';
 import './index.css';
 
-interface Products{
-    id: number,
-    name: string,
-    price: number,
-    supplier: string,
-    barcode: number,
-}
-
-interface Data{
-    id: number,
-    user: string,
-    password: string,
-    name: string,
-    cpf: string,
-    birth: string,
-    products: Products[],
-}
-
 interface LoginProps{
     setPage: React.Dispatch<React.SetStateAction<string>>
     setAuth: React.Dispatch<React.SetStateAction<string>>
+    saveUsername: React.Dispatch<React.SetStateAction<string>>
 }
 
 
 
-const Login = ({setPage, setAuth}: LoginProps) => {
+const Login = ({setPage, setAuth, saveUsername}: LoginProps) => {
     const {
         username,
         setUsername,
@@ -34,7 +17,7 @@ const Login = ({setPage, setAuth}: LoginProps) => {
         setPassword,
         error,
         handleSubmit
-    } = useLogin({setPage, setAuth});
+    } = useLogin({setAuth, saveUsername});
 
     return(
         <form className='formDiv'>

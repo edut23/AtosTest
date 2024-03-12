@@ -7,8 +7,6 @@ import { Api } from "../axios-config";
 export const loginApi = async (email: string, password: string): Promise<string | Error> => {
     try{
         const { data } = await Api.post('/auth/login', {email, password});
-
-        console.log({email, password})
         
         if(data)
             return data.access_token;

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { getProductsAPI } from "../api/getProductsAPI";
 import { PostProductsAPI } from "../api/postProductsAPI";
 import { EditProductsAPI } from "../api/editProductsAPI";
+import { DeleteProductsAPI } from "../api/deleteProductsAPI";
 
 interface Error{
     id: number,
@@ -9,7 +10,8 @@ interface Error{
     cost: string,
     category: string,
     date: string,
-    productId: number
+    productId: number,
+    units: number
 }
 
 interface Products{
@@ -33,10 +35,11 @@ const useMenu = (auth: string) => {
         date: "",
         units: 1
     });
-    const [unit, setUnits] = useState(1);
+    const [modal, setModal] = useState(false);
     const [error, setError] = useState<Partial<Error>>({});
     const [products, setProducts] = useState<Products[]>([]);
     const [key, setKey] = useState(-1);
+    const [deleteId, setDeleteId] = useState(-1);
 
     useEffect(() => {
         getData();
@@ -93,14 +96,11 @@ const useMenu = (auth: string) => {
             novosErros.cost = 'O valor do produto deve ser mais que R$0,01';
         }
 
-        console.log(Object.keys(novosErros).length)
 
         if (Object.keys(novosErros).length === 0) {
-            console.log("foi")
             return true;
         } else {
             setError(novosErros);
-            console.log("ero")
         
             return false
         }
@@ -114,7 +114,7 @@ const useMenu = (auth: string) => {
                     cost: form.cost,
                     category: form.category,
                     productId: form.productId,
-                    date: new Date().toLocaleDateString("pt-BR"),
+                    date: new Date().toLocaleString("pt-BR"),
                     units: form.units
                 }
             try{
@@ -123,8 +123,6 @@ const useMenu = (auth: string) => {
                     if (result instanceof Error) {
                         alert(result.message)
                     }
-                    else
-                        console.log("foi")
                 })
                 setForm({
                     id: 1,
@@ -143,10 +141,9 @@ const useMenu = (auth: string) => {
         }
     }
 
-    const editProduct = (key: number) => {
-        setKey(key);
-        setForm(products[key]);
-        handleUnit(Math.floor(Math.random() * 20));
+    const editProduct = async (key: number) => {
+        await setForm(products[key]);
+        await setKey(key);
         setAddmode("edit");
     };
 
@@ -167,8 +164,6 @@ const useMenu = (auth: string) => {
                     if (result instanceof Error) {
                         alert(result.message)
                     }
-                    else
-                        console.log("foi")
                 })
                 setForm({
                     id: 1,
@@ -188,6 +183,24 @@ const useMenu = (auth: string) => {
         }
     }
 
+    const deleteProduct = async() => {
+        try{
+            await DeleteProductsAPI(deleteId, auth)
+            .then((result) => {
+                if (result instanceof Error) {
+                    alert(result.message)
+                }
+            })
+            setError({});
+            getData();
+            setAddmode("off");
+            setDeleteId(-1);
+            setModal(false);   
+        }
+        catch (error){
+        }
+    }
+
     return {
         form,
         handleName,
@@ -195,7 +208,8 @@ const useMenu = (auth: string) => {
         handleCategory,
         handleProductId,
         handleUnit,
-        unit,
+        modal,
+        setModal,
         error,
         addMode,
         setAddmode,
@@ -203,7 +217,10 @@ const useMenu = (auth: string) => {
         products,
         editProduct,
         confirmEdit,
-        key
+        key,
+        setKey,
+        deleteProduct,
+        setDeleteId
     }
 }
 

@@ -3,6 +3,10 @@
     width: 100%;
     gap: 32px;
     flex-direction: row;
+
+    button{
+        cursor: pointer;
+    }
 }
 
 img{

@@ -1,31 +1,12 @@
 import { useState } from "react";
 import { loginApi } from "../api/loginAPI";
 
-interface Products{
-    id: number,
-    name: string,
-    price: number,
-    supplier: string,
-    barcode: number,
-}
-
-
-interface Data{
-    id: number,
-    user: string,
-    password: string,
-    name: string,
-    cpf: string,
-    birth: string,
-    products: Products[],
-}
-
 interface LoginProps{
-    setPage: React.Dispatch<React.SetStateAction<string>>
     setAuth: React.Dispatch<React.SetStateAction<string>>
+    saveUsername: React.Dispatch<React.SetStateAction<string>>
 }
 
-const useLogin = ({setPage, setAuth}: LoginProps) => {
+const useLogin = ({setAuth , saveUsername}: LoginProps) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -39,7 +20,7 @@ const useLogin = ({setPage, setAuth}: LoginProps) => {
             if(data instanceof Error)
                 setError('Credenciais inválidas');
             else{
-                console.log(data)
+                saveUsername(username)
                 setAuth(data);
             }
         } 

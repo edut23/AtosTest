@@ -5,6 +5,7 @@ import './index.css';
 interface SignUpProps{
     setPage: React.Dispatch<React.SetStateAction<string>>
     setAuth: React.Dispatch<React.SetStateAction<string>>
+    setUsername: React.Dispatch<React.SetStateAction<string>>
 }
 
 const SignUp = (props: SignUpProps) => {
@@ -18,7 +19,7 @@ const SignUp = (props: SignUpProps) => {
         handleName,
         error,
         handleSubmit
-    } = useSignUp(props.setPage, props.setAuth);
+    } = useSignUp(props.setUsername, props.setAuth);
 
     return(
         <form>

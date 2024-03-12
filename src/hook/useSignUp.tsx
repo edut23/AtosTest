@@ -7,7 +7,7 @@ interface SignUpInfo{
     password: string,
 }
 
-const useSignUp = (setPage: React.Dispatch<React.SetStateAction<string>>, setAuth: React.Dispatch<React.SetStateAction<string>>) => {
+const useSignUp = (setUsername: React.Dispatch<React.SetStateAction<string>>, setAuth: React.Dispatch<React.SetStateAction<string>>) => {
     const [form, setForm] = useState<SignUpInfo>({
         email: '',
         name: '',
@@ -82,12 +82,12 @@ const useSignUp = (setPage: React.Dispatch<React.SetStateAction<string>>, setAut
                     console.error("Erro ao cadastrar")
                 }
                 else{
-                    console.log(data)
+                    setUsername(form.email)
                     setAuth(data);
                 }
             } 
             catch (error) {
-                console.log('Credenciais inválidas');
+                console.error('Credenciais inválidas');
             }
     };
 
