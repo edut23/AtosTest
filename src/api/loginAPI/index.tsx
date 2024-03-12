@@ -1,7 +1,27 @@
-import { useState } from "react";
 import { Api } from "../axios-config";
+<<<<<<< HEAD
 //import axios from "axios";
 //import MockAdapter from "axios-mock-adapter"; 
+=======
+
+interface Products{
+    id: number,
+    name: string,
+    price: number,
+    supplier: string,
+    barcode: number,
+}
+
+interface Item{
+    id: number,
+    user: string,
+    password: string,
+    name: string,
+    cpf: string,
+    birth: string,
+    products: Products[],
+}
+>>>>>>> 24ebdde8ea7aecd79089bd0319fb03b9f7c1bf56
 
 
 export const loginApi = async (email: string, password: string): Promise<string | Error> => {
@@ -18,20 +38,3 @@ export const loginApi = async (email: string, password: string): Promise<string 
         return new Error((error as { message: string}).message || 'Listing movies error.')
     }
 };
-
-/*describe('Login', () => {
-    it('should successfully log in and return token', async () => {
-      // Criar uma instância do mock adapter
-      const mock = new MockAdapter(axios);
-  
-      // Definir a resposta do mock para a rota de login
-      const mockToken = 'mocked_token';
-      mock.onPost('/user').reply(200, { token: mockToken });
-  
-      // Chamar a função de login
-      const token = await loginApi('username', 'password');
-  
-      // Verificar se a função de login retornou o token esperado
-      expect(token).toEqual(mockToken);
-    });
-  });*/
