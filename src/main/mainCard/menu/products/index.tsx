@@ -5,15 +5,8 @@ import useMenu from "../../../../hook/useMenu";
 import Edit from "./edit";
 import SearchIcon from "../../../../assets/searchIcon";
 
-interface Products{
-    id: number,
-    name: string,
-    cost: number,
-    category: string,
-    date: string,
-    productId: number,
-    units: number
-}
+import { Products } from "../../../../interface";
+import FilterIcon from "../../../../assets/filterIcon";
 
 interface ProductsProps{
     products: Products[],
@@ -34,6 +27,7 @@ const ProductsList = ({auth}: ProductsProps) => {
         setModal,
         addProduct,
         products,
+        setProducts,
         editProduct,
         confirmEdit,
         key,
@@ -41,15 +35,30 @@ const ProductsList = ({auth}: ProductsProps) => {
         setDeleteId
     } = useMenu(auth);
 
-    const [search, setSearch] = useState('')
+    const [search, setSearch] = useState('');
+    const [sortConfig, setSortConfig] = useState<{ key: keyof Products; direction: 'asc' | 'desc' } | null>(null);
  
     const lowerSearch = search.toLowerCase();
 
     const mainFilter = products.filter((item) =>
-            item.name.toLowerCase().includes(lowerSearch) ||
-            item.category.toLowerCase().includes(lowerSearch) ||
-            item.date.toLowerCase().includes(lowerSearch)
-        );
+        item.dsProduto.toLowerCase().includes(lowerSearch) ||
+        item.dsCategoria.toLowerCase().includes(lowerSearch) ||
+        item.dtCadastro.toLowerCase().includes(lowerSearch)
+    );
+
+    const sortData = (key: keyof Products) => {
+        let direction: 'asc' | 'desc' = 'asc';
+        if (sortConfig && sortConfig.key === key && sortConfig.direction === 'asc') {
+          direction = 'desc';
+        }
+        const sortedData = [...products].sort((a, b) => {
+          if (a[key] < b[key]) return direction === 'asc' ? -1 : 1;
+          if (a[key] > b[key]) return direction === 'asc' ? 1 : -1;
+          return 0;
+        });
+        setSortConfig({ key, direction });
+        setProducts(sortedData);
+      };
 
     return (
         <div className="productsDiv">
@@ -87,11 +96,11 @@ const ProductsList = ({auth}: ProductsProps) => {
             <table>
                 <thead>
                 <tr>
-                    <th>Descrição</th>
-                    <th>Categoria</th>
-                    <th>Data Cadastro</th>
-                    <th>Cód. Produto</th>
-                    <th>Preço</th>
+                    <th onClick={() => sortData("dsProduto")}>Descrição <FilterIcon/></th>
+                    <th onClick={() => sortData("dsCategoria")}>Categoria <FilterIcon/></th>
+                    <th onClick={() => sortData("dtCadastro")}>Data Cadastro <FilterIcon/></th>
+                    <th onClick={() => sortData("cdProduto")}>Cód. Produto <FilterIcon/></th>
+                    <th onClick={() => sortData("vlProduto")}>Preço <FilterIcon/></th>
                     <th className="center">Ações</th>
                 </tr>
                 </thead>
@@ -99,11 +108,11 @@ const ProductsList = ({auth}: ProductsProps) => {
                 {mainFilter?.map((value, key) => {
                     return (
                     <tr key={key}>
-                        <td>{value.name}</td>
-                        <td>{value.category}</td>
-                        <td>{value.date}</td>
-                        <td>{value.productId}</td>
-                        <td>{value.cost}</td>
+                        <td>{value.dsProduto}</td>
+                        <td>{value.dsCategoria}</td>
+                        <td>{new Date (value.dtCadastro).toLocaleString("pt-BR")}</td>
+                        <td>{value.cdProduto}</td>
+                        <td>{value.vlProduto}</td>
                         <td className="center">
                             <button className="blue" onClick={() => editProduct(key)}>Editar</button>
                             <button className="red" onClick={() => {setModal(true); setDeleteId(value.id)}}>Excluir</button>

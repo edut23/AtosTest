@@ -3,40 +3,21 @@ import { getProductsAPI } from "../api/getProductsAPI";
 import { PostProductsAPI } from "../api/postProductsAPI";
 import { EditProductsAPI } from "../api/editProductsAPI";
 import { DeleteProductsAPI } from "../api/deleteProductsAPI";
-
-interface Error{
-    id: number,
-    name: string,
-    cost: string,
-    category: string,
-    date: string,
-    productId: number,
-    units: number
-}
-
-interface Products{
-    id: number,
-    name: string,
-    cost: number,
-    category: string,
-    date: string,
-    productId: number,
-    units: number
-}
+import { Products, ProductError } from "../interface";
 
 const useMenu = (auth: string) => {
     const [addMode, setAddmode] = useState("off");
     const [form, setForm] = useState<Products>({
         id: 1,
-        name: "",
-        cost: 1,
-        category: "",
-        productId: 1,
-        date: "",
-        units: 1
+        dsProduto: "",
+        vlProduto: 0,
+        dsCategoria: "",
+        dtCadastro: "",
+        cdProduto: "",
+        qtdProduto: 1
     });
     const [modal, setModal] = useState(false);
-    const [error, setError] = useState<Partial<Error>>({});
+    const [error, setError] = useState<Partial<ProductError>>({});
     const [products, setProducts] = useState<Products[]>([]);
     const [key, setKey] = useState(-1);
     const [deleteId, setDeleteId] = useState(-1);
@@ -56,6 +37,7 @@ const useMenu = (auth: string) => {
                         let temp: Products[] = [];
                         result.data.map((item) => {
                             temp = [...temp, item];
+                            console.log(result.data, temp)
 
                             return temp
                         })
@@ -66,34 +48,34 @@ const useMenu = (auth: string) => {
 
 
     const handleName = (value: string) =>{
-        setForm({...form, name: value});
+        setForm({...form, dsProduto: value});
     }
 
     const handlePrice = (value: number) =>{
-        setForm({...form, cost: value});
+        setForm({...form, vlProduto: value});
     }
 
     const handleCategory = (value: string) =>{
-        setForm({...form, category: value});
+        setForm({...form, dsCategoria: value});
     }
 
-    const handleProductId = (value: number) =>{
-        setForm({...form, productId: value});
+    const handleProductId = (value: string) =>{
+        setForm({...form, cdProduto: value});
     }
 
     const handleUnit = (value: number) => {
-        setForm({...form, units: value});
+        setForm({...form, qtdProduto: value});
     }
 
     const validarCampos = () => {
-        const novosErros: Partial<Error> = {};
+        const novosErros: Partial<ProductError> = {};
       
-        if (form.name.trim() === '' && form.name.length < 1) {
-          novosErros.name = 'Insira um nome com mais de um caractere';
+        if (form.dsProduto.trim() === '' && form.dsProduto.length < 1) {
+          novosErros.dsProduto = 'Insira um nome com mais de um caractere';
         }
       
-        if (form.cost < 0.01) {
-            novosErros.cost = 'O valor do produto deve ser mais que R$0,01';
+        if (form.vlProduto < 0.01) {
+            novosErros.vlProduto = 'O valor do produto deve ser mais que R$0,01';
         }
 
 
@@ -109,13 +91,13 @@ const useMenu = (auth: string) => {
     const addProduct = async () => {
         if(validarCampos()){
             let tempArray = {
-                    id: form.productId,
-                    name: form.name,
-                    cost: form.cost,
-                    category: form.category,
-                    productId: form.productId,
-                    date: new Date().toLocaleString("pt-BR"),
-                    units: form.units
+                    id: products.length + 1,
+                    dsProduto: form.dsProduto,
+                    vlProduto: form.vlProduto,
+                    dsCategoria: form.dsCategoria,
+                    cdProduto: form.cdProduto,
+                    dtCadastro: new Date().toString(),
+                    qtdProduto: form.qtdProduto
                 }
             try{
                 await PostProductsAPI(tempArray, auth)
@@ -126,12 +108,12 @@ const useMenu = (auth: string) => {
                 })
                 setForm({
                     id: 1,
-                    name: "",
-                    cost: 1,
-                    category: "",
-                    productId: 1,
-                    date: "",
-                    units: 1
+                    dsProduto: "",
+                    vlProduto: 0,
+                    dsCategoria: "",
+                    dtCadastro: "",
+                    cdProduto: "",
+                    qtdProduto: 1
                 })
                 setError({})
                 setAddmode("off");    
@@ -151,12 +133,12 @@ const useMenu = (auth: string) => {
         if(validarCampos()){
             let tempArray = {
                     id: form.id,
-                    name: form.name,
-                    cost: form.cost,
-                    category: form.category,
-                    productId: form.productId,
-                    date: form.date,
-                    units: form.units
+                    dsProduto: form.dsProduto,
+                    vlProduto: form.vlProduto,
+                    dsCategoria: form.dsCategoria,
+                    cdProduto: form.cdProduto,
+                    dtCadastro: form.dtCadastro,
+                    qtdProduto: form.qtdProduto
                 }
             try{
                 await EditProductsAPI(form.id, tempArray, auth)
@@ -167,12 +149,12 @@ const useMenu = (auth: string) => {
                 })
                 setForm({
                     id: 1,
-                    name: "",
-                    cost: 1,
-                    category: "",
-                    productId: 1,
-                    date: "",
-                    units: 1
+                    dsProduto: "",
+                    vlProduto: 0,
+                    dsCategoria: "",
+                    dtCadastro: "",
+                    cdProduto: "",
+                    qtdProduto: 1
                 })
                 setError({})
                 setAddmode("off");
@@ -215,6 +197,7 @@ const useMenu = (auth: string) => {
         setAddmode,
         addProduct,
         products,
+        setProducts,
         editProduct,
         confirmEdit,
         key,

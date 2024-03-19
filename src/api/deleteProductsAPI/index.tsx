@@ -1,14 +1,6 @@
 import { Api } from "../axios-config";
 
-interface Products{
-    id: number,
-    name: string,
-    cost: number,
-    category: string,
-    date: string,
-    productId: number,
-    units: number
-}
+import { Products } from "../../interface";
 
 interface Data{
     data: Products[],

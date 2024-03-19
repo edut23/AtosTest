@@ -1,14 +1,6 @@
 import "./index.css"
 
-interface Products{
-    id: number,
-    name: string,
-    cost: number,
-    category: string,
-    date: string,
-    productId: number,
-    units: number
-}
+import { Products } from "../../../../../interface"
 
 interface RegisterProps {
     setAddmode: React.Dispatch<React.SetStateAction<string>>, 
@@ -16,7 +8,7 @@ interface RegisterProps {
     handleCategory: (e: string) => void,
     handleName: (e: string) => void,
     handlePrice: (e: number) => void,
-    handleProductId: (e: number) => void,
+    handleProductId: (e: string) => void,
     handleUnit: (e: number) => void,
     addProduct: () => void,
 }
@@ -31,23 +23,23 @@ const Register = (props: RegisterProps) => {
             <div className="inputDiv">
                 <div className="registerInput">
                     <p>Descrição</p>
-                    <input placeholder="Descrição do produto" type="text" value={props.form?.name} onChange={(e) => props.handleName(e.target.value)}/>
+                    <input placeholder="Descrição do produto" type="text" value={props.form?.dsProduto} onChange={(e) => props.handleName(e.target.value)}/>
                 </div>
                 <div className="registerInput">
                     <p>Categoria</p>
-                    <input placeholder="Categoria do produto" type="text" value={props.form?.category} onChange={(e) => props.handleCategory(e.target.value)}/>
+                    <input placeholder="Categoria do produto" type="text" value={props.form?.dsCategoria} onChange={(e) => props.handleCategory(e.target.value)}/>
                 </div>
                 <div className="registerInput">
                     <p>Código</p>
-                    <input placeholder="Código do Produto" type="number" value={props.form?.productId} onChange={(e) => props.handleProductId(parseInt(e.target.value))}/>
+                    <input placeholder="Código do Produto" type="number" value={props.form?.cdProduto} onChange={(e) => props.handleProductId(e.target.value)}/>
                 </div>
                 <div className="registerInput">
                     <p>Valor</p>
-                    <input placeholder="Valor do produto" type="number" value={props.form?.cost} onChange={(e) => props.handlePrice(parseFloat(e.target.value))}/>
+                    <input placeholder="Valor do produto" type="number" value={props.form?.vlProduto} onChange={(e) => props.handlePrice(parseFloat(e.target.value))}/>
                 </div>
                 <div className="registerInput">
                     <p>Quantiade</p>
-                    <input placeholder="Quantidade do produto" type="number" value={props.form?.units} onChange={(e) => props.handleUnit(parseInt(e.target.value))}/>
+                    <input placeholder="Quantidade do produto" type="number" value={props.form?.qtdProduto} onChange={(e) => props.handleUnit(parseInt(e.target.value))}/>
                 </div>
             </div>
         </div>
