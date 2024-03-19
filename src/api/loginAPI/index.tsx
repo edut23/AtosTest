@@ -1,23 +1,5 @@
 import { Api } from "../axios-config";
 
-interface Products{
-    id: number,
-    name: string,
-    price: number,
-    supplier: string,
-    barcode: number,
-}
-
-interface Item{
-    id: number,
-    user: string,
-    password: string,
-    name: string,
-    cpf: string,
-    birth: string,
-    products: Products[],
-}
-
 
 export const loginApi = async (email: string, password: string): Promise<string | Error> => {
     try{

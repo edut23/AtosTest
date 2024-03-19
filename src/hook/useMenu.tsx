@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { getProductsAPI } from "../api/getProductsAPI";
 import { PostProductsAPI } from "../api/postProductsAPI";
 import { EditProductsAPI } from "../api/editProductsAPI";
@@ -22,11 +22,7 @@ const useMenu = (auth: string) => {
     const [key, setKey] = useState(-1);
     const [deleteId, setDeleteId] = useState(-1);
 
-    useEffect(() => {
-        getData();
-    },[addMode])
-
-    const getData = async () => {
+    const getData = useCallback (async () => {
         if(addMode === "off")
             getProductsAPI(auth)
                 .then((result) => {
@@ -37,14 +33,17 @@ const useMenu = (auth: string) => {
                         let temp: Products[] = [];
                         result.data.map((item) => {
                             temp = [...temp, item];
-                            console.log(result.data, temp)
 
                             return temp
                         })
                         setProducts(temp);
                     }
                 })
-    }
+    }, [addMode, auth])
+
+    useEffect(() => {
+        getData();
+    },[addMode, getData])
 
 
     const handleName = (value: string) =>{
