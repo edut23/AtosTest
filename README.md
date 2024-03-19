@@ -4,7 +4,7 @@ Execute yarn install or npm install.
 
 ## Create mocked back-end with Server Json
 
-Execute yarn json-server server.json or npx json-server server.json and run at http://localhost:3000.
+Execute yarn json-server server.json or npx json-server server.json and run at http://localhost:8000.
 
 ### Start application.
 
