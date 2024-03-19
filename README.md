@@ -4,16 +4,12 @@ Execute yarn install or npm install.
 
 ## Create mocked back-end with Server Json
 
-Execute yarn json-server server.json or npx json-server server.json and run at http://localhost:8000.
+Clone https://github.com/jonatasesdras02/api-avalicao-front and follow the instructions
 
 ### Start application.
 
-Execute yarn start or npm start and press y to run on another port.
+Execute yarn start or npm start.
 
 ### Default user.
 
-Use the default user login (user: edut23@gmail.com, password: edu) or sign up at purple text "Cadastre-se".
-
-### `npm test`
-
-Launches the unit tests runner in the interactive watch mode.
+Use the default user login (user: seuemail@email.com, password: bestPassword) or sign up at purple text "Cadastre-se".
